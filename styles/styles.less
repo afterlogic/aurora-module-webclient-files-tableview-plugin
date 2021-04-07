@@ -4,26 +4,9 @@
 	padding: 0px !important;
 
 	.item {
-		.image {
-			display: inline-block;
-			float: left;
-			margin: 1px 8px 0px 0px;
-			height: 32px;
-			width: 32px;
-			line-height: 32px;
-
-			img {
-				max-height: 100%;
-				max-width: 100%;
-				vertical-align: middle;
-			}
-
-			.icon {
-				vertical-align: middle;
-			}
-		}
-		.name {
-			margin-top: 8px;
+		.item_content {
+			padding: 6px 16px 6px 0px;
+			white-space: nowrap;
 		}
 
 		cursor: default !important;
@@ -36,14 +19,45 @@
 		padding: 0px;
 		text-align: left !important;
 
-		&.folder2 {
-			.icon {
-				background: url("../../images/sprites.png");
-				background-position: -440px -360px;
-				display: inline-block;
-				height: 30px;
-				width: 35px;
+		.image, .name, .icons-container, .actions, &.folder2 .icon {
+			display: inline-block;
+			float: left;
+			line-height: 32px;
+			margin: 0 0 0 12px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		.image {
+			height: 32px;
+			width: 32px;
+
+			img {
+				max-height: 100%;
+				max-width: 100%;
+				vertical-align: middle;
 			}
+
+			.icon {
+				vertical-align: middle;
+			}
+		}
+
+		.icons-container span {
+			vertical-align: middle;
+		}
+		.data {
+			float: right;
+			margin: 0 0 0 12px;
+			.size {
+				text-align: right;
+			}
+		}
+
+		&.folder2 .icon {
+			background: url("../../images/sprites.png");
+			background-position: -440px -360px;
+			height: 32px;
+			width: 33px;
 		}
 	}
 }

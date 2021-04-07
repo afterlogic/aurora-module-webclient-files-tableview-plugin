@@ -5,16 +5,15 @@
 		css: {'selected': selected, 'checked': checked, 'deleted': deleted, 'published': published}"
 >
 	<div class="item_content ui-droppable dragHandle" data-bind="css: {'recivedAnim': recivedAnim()}, droppable: {valueFunc: function (oEvent, oUi) {$root.filesDrop($data, oEvent, oUi);}}">
-		<span class="icon" style="vertical-align: middle; float: left"></span>
-			
-		<div class="data">
-			<span class="name fadeout" data-bind="text: fileName()" style="padding-left: 10px"></span>
-			<div class="icons-container">
-				<span class="published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
-				<!-- ko if: (isShared()) -->
-				<span class="shared-image-table"></span>
-				<!-- /ko -->
-			</div>
+		<span class="icon"></span>
+
+		<span class="name fadeout" data-bind="text: fileName()"></span>
+		<div class="icons-container">
+			<span class="published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
+			<!-- ko if: (isShared()) -->
+			<span class="shared-image-table"></span>
+			<!-- /ko -->
 		</div>
+		<div class="clearfix"></div>
 	</div>
 </div>
