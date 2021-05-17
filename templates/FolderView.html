@@ -11,7 +11,7 @@
 		<div class="icons-container">
 			<span class="published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
 			<!-- ko if: (isShared()) -->
-			<span class="shared-image-table"></span>
+			<span class="shared-image-table" data-bind="click: function (oItem) { $root.onFileShareIconClick(oItem); }, clickBubble: false"></span>
 			<!-- /ko -->
 		</div>
 		<div class="clearfix"></div>

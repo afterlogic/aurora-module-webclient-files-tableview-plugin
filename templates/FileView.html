@@ -1,8 +1,8 @@
 <!-- ko if: !bIsHidden -->
 <div class="item file" data-bind="
-	draggablePlace: !$parent.bInPopup ? $parent.dragAndDropHelperBound : null, 
-	draggableDragStartCallback: function() {if (!$parent.bInPopup) $root.dragover(true);}, 
-	draggableDragStopCallback: function() {if (!$parent.bInPopup) $root.dragover(false);}, 
+	draggablePlace: !$parent.bInPopup ? $parent.dragAndDropHelperBound : null,
+	draggableDragStartCallback: function() {if (!$parent.bInPopup) $root.dragover(true);},
+	draggableDragStopCallback: function() {if (!$parent.bInPopup) $root.dragover(false);},
 	css: {'selected': selected, 'checked': checked, 'deleted': deleted, 'published': published}"
 >
 	<div class="item_content dragHandle">
@@ -19,10 +19,10 @@
 		<div class="icons-container">
 			<span class="published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
 			<!-- ko if: (isShared()) -->
-			<span class="shared-image-table"></span>
+			<span class="shared-image-table" data-bind="click: function (oItem) { $root.onFileShareIconClick(oItem); }, clickBubble: false"></span>
 			<!-- /ko -->
 			<!-- ko if: (bIsSecure()) -->
-			<span class="secure-image-table"></span>
+			<span class="secure-image-table" data-bind="click: function (oItem) { $root.onSecureIconClick(oItem); }, clickBubble: false"></span>
 			<!-- /ko -->
 		</div>
 		<div class="actions">
