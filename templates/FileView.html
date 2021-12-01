@@ -18,7 +18,7 @@
 		<span class="name fadeout" data-bind="text: fileName"></span>
 		<div class="icons-container">
 			<span class="published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
-			<!-- ko if: (isShared()) -->
+			<!-- ko if: (sharedWithOthers()) -->
 			<span class="shared-image-table" data-bind="click: function (oItem) { $root.onFileShareIconClick(oItem); }, clickBubble: false"></span>
 			<!-- /ko -->
 			<!-- ko if: (bIsSecure()) -->
