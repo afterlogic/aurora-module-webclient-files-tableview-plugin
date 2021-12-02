@@ -15,7 +15,7 @@
 			<span class="icon" data-bind="css: extension().toLowerCase()"></span>
 			<!-- /ko -->
 		</div>
-		<span class="name fadeout" data-bind="text: fileName"></span>
+		<span class="name fadeout" data-bind="text: displayName"></span>
 		<div class="icons-container">
 			<span class="published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
 			<!-- ko if: (sharedWithOthers()) -->
