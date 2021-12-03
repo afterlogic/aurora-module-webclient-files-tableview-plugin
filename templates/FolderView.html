@@ -1,7 +1,7 @@
 <div class="item folder2" data-bind="
-		draggablePlace: !$parent.bInPopup ? $parent.dragAndDropHelperBound : null,
-		draggableDragStartCallback: function() {if (!$parent.bInPopup) $root.dragover(true);},
-		draggableDragStopCallback: function() {if (!$parent.bInPopup) $root.dragover(false);},
+		draggablePlace: allowDrag() ? function (oFile, bCtrl) { return $parent.dragAndDropHelper(oFile, bCtrl); } : null,
+		draggableDragStartCallback: function() { if (allowDrag()) $root.dragover(true); },
+		draggableDragStopCallback: function() { if (allowDrag()) $root.dragover(false); },
 		css: {'selected': selected, 'checked': checked, 'deleted': deleted, 'published': published}"
 >
 	<div class="item_content ui-droppable dragHandle" data-bind="css: {'recivedAnim': recivedAnim()}, droppable: {valueFunc: function (oEvent, oUi) {$root.filesDrop($data, oEvent, oUi);}}">

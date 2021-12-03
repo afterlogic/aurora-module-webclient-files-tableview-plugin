@@ -1,8 +1,9 @@
 <!-- ko if: !bIsHidden -->
 <div class="item file" data-bind="
-	draggablePlace: !$parent.bInPopup ? $parent.dragAndDropHelperBound : null,
-	draggableDragStartCallback: function() {if (!$parent.bInPopup) $root.dragover(true);},
-	draggableDragStopCallback: function() {if (!$parent.bInPopup) $root.dragover(false);},
+	event: allowDrag() ? { 'dragstart': eventDragStart } : null,
+	draggablePlace: allowDrag() ? function (oFile, bCtrl) { return $parent.dragAndDropHelper(oFile, bCtrl); } : null,
+	draggableDragStartCallback: function() { if (allowDrag()) $root.dragover(true); },
+	draggableDragStopCallback: function() { if (allowDrag()) $root.dragover(false); },
 	css: {'selected': selected, 'checked': checked, 'deleted': deleted, 'published': published}"
 >
 	<div class="item_content dragHandle">
