@@ -19,17 +19,30 @@
 		padding: 0px;
 		text-align: left !important;
 
-		.image, .name, .icons-container, .actions, &.folder2 .icon {
+		.image, .name, .actions, &.folder2 .icon {
 			display: inline-block;
 			float: left;
-			line-height: 32px;
-			margin: 0 0 0 12px;
+			line-height: 46px;
+			margin: 0 0 0 18px;
 			text-align: center;
 			vertical-align: middle;
 		}
+		.actions a {
+			margin-right: 10px;
+		}
+		&.file .name {
+			font-size: 10pt;
+			line-height: inherit;
+			text-align: left;
+			margin-top: 9px;
+		}
+		.data {
+			color: #929292;
+			font-size: 9px;
+		}
 		.image {
-			height: 32px;
-			width: 32px;
+			height: 46px;
+			width: 60px;
 
 			img {
 				max-height: 100%;
@@ -42,22 +55,39 @@
 			}
 		}
 
-		.icons-container span {
-			vertical-align: middle;
-		}
-		.data {
-			float: right;
-			margin: 0 0 0 12px;
-			.size {
-				text-align: right;
+		&.folder2 {
+			.icon {
+				background: url("../../images/sprites.png");
+				background-position: -880px -400px;
+				height: 65px;
+				width: 66px;
+				margin: -5px 0 -13px -3px;
+				transform: scale(0.68);
+			}
+			.folder_shared_with_me_icon {
+				left: 47px;
+				top: 48%;
+				&:before {
+					font-size: 19px;
+				}
 			}
 		}
-
-		&.folder2 .icon {
-			background: url("../../images/sprites.png");
-			background-position: -440px -360px;
-			height: 32px;
-			width: 33px;
+		&.file {
+			.icon {
+				margin: -20px 0 -18px -2px;
+				transform: scale(0.6);
+			}
+			.file_shared_with_me_icon {
+				height: 20px;
+				left: 58px;
+				top: 10px;
+				width: 20px;
+				line-height: 18px;
+				&:before {
+					font-size: 18px;
+					line-height: 18px;
+				}
+			}
 		}
 	}
 }
@@ -121,42 +151,8 @@
 	}
  }
 
- .icons-container {
-	 margin-left: 10px;
- }
- .secure-image-table {
-	cursor: pointer;
-	border-radius: 5px;
-	display: inline-block;
-	height: 18px;
-	width: 18px;
-	overflow: hidden;
-	position: relative;
-	background: #555;
-	color: #fff;
-	line-height: 18px;
-
-	.init-icon-font();
-
-	&:before {
-		display: inline-block;
-		font-size: 18px;
-		height: 100%;
-		width: 100%;
-		content: "\e90a";
-	}
- }
-
- .no-public .panel.files .items_list .item.published .icons-container .published_icon {
-	cursor: pointer;
-	margin: 0;
-	float:	none;
-	display: inline-block;
-	border-radius: 5px;
-	line-height: 18px;
-
-	&:before {
-		display: inline-block;
-		height: 18px;
-	}
- }
+.item_list_table_view .file_states {
+	float: right;
+	margin: 14px 0 14px 12px;
+	position: initial;
+}
