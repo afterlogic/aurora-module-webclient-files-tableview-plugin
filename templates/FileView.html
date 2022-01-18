@@ -4,7 +4,7 @@
 	draggablePlace: allowDrag() ? function (file, ctrlOrCmdUsed) { return $parent.dragAndDropHelper(file, ctrlOrCmdUsed); } : null,
 	draggableDragStartCallback: function() { if (allowDrag()) $root.dragover(true); },
 	draggableDragStopCallback: function() { if (allowDrag()) $root.dragover(false); },
-	css: {'selected': selected, 'checked': checked, 'deleted': deleted, 'published': published}"
+	css: cssClasses"
 >
 	<div class="item_content dragHandle">
 		<div class="image" data-bind="customTooltip: getTooltip(iconAction()), click: function () { executeAction(iconAction()); },
@@ -27,11 +27,13 @@
 				<span data-bind="text: sLastModified"></span>
 			</div>
 		</div>
+		<span class="progress" data-bind="visible: visibleProgress()">
+			<span data-bind="text: progressText"></span>
+			<a href="javascript: void(0)" data-bind="i18n: {'key': 'COREWEBCLIENT/ACTION_CANCEL'},
+			   visible: visibleCancelButton,
+			   click: function () { $parent.onFileRemove( uploadUid(), $data); }"></a>
+		</span>
 		<div class="actions">
-			<span class="progress" data-bind="visible: visibleProgress()">
-				<span data-bind="style: {'width': progressPercent() + '%'}"></span>
-				<span class="progress-percent" data-bind="text: progressPercent() + '%'"></span>
-			</span>
 			<span class="status_text" data-bind="text: statusText(), css: {'error': uploadError()}, customTooltip: statusTooltip, visible: statusText().length > 0"></span>
 			<div data-bind="visible: allowActions() && uploaded() && !uploadError() && statusText().length === 0 && !downloading() && !visibleProgress()">
 				<a href="javascript: void(0)" data-bind="visible: firstAction().length > 0,

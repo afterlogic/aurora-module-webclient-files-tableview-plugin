@@ -1,14 +1,9 @@
-.files-list.items_sub_list {
+.panel.files .items_list .items_sub_list.item_list_table_view {
 	float: left;
 	width: 100%;
 	padding: 0px !important;
 
 	.item {
-		.item_content {
-			padding: 6px 16px 6px 0px;
-			white-space: nowrap;
-		}
-
 		cursor: default !important;
 		display: block !important;
 		height: auto !important;
@@ -18,8 +13,32 @@
 		margin: 0px !important;
 		padding: 0px;
 		text-align: left !important;
+		
+		a {
+			color: @theme-attachment-action-link-color;
+			&:hover {
+				color: darken(@theme-attachment-action-link-color, 15%);
+				text-decoration: none;
+			}
+		}
 
-		.image, .name, .actions, &.folder2 .icon {
+		&.deleted {
+			-webkit-transition: none;
+			-moz-transition: none;
+			-o-transition: none;
+			transition: none;
+			-webkit-transform: none;
+			transform: none;
+
+			max-height: 0px !important;
+		}
+
+		.item_content {
+			padding: 6px 16px 6px 0px;
+			white-space: nowrap;
+		}
+
+		.image, .name, .actions, .progress, &.folder2 .icon {
 			display: inline-block;
 			float: left;
 			line-height: 46px;
@@ -27,9 +46,18 @@
 			text-align: center;
 			vertical-align: middle;
 		}
-		.actions a {
-			margin-right: 10px;
+		.actions {
+			float: right;
+			a {
+				margin-right: 10px;
+			}
 		}
+		.file_states {
+			float: left;
+			margin: 14px 0 14px 12px;
+			position: initial;
+		}
+
 		&.file .name {
 			font-size: 10pt;
 			line-height: inherit;
@@ -150,9 +178,3 @@
 		content: "\e912";
 	}
  }
-
-.item_list_table_view .file_states {
-	float: right;
-	margin: 14px 0 14px 12px;
-	position: initial;
-}
