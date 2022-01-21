@@ -19,7 +19,7 @@
 			<span class="file_shared_with_me_icon" data-bind="customTooltip: sHeaderText"></span>
 			<!-- /ko -->
 		</div>
-		<div class="name fadeout">
+		<div class="name">
 			<div data-bind="text: displayName"></div>
 			<div class="data" >
 				<span data-bind="text: friendlySize"></span>
@@ -27,6 +27,18 @@
 				<span data-bind="text: sLastModified"></span>
 			</div>
 		</div>
+		<div class="file_states">
+			<!-- ko if: (bIsSecure()) -->
+			<span class="file_encrypted_icon" data-bind="click: function (oItem) { $root.onSecureIconClick(oItem); }"></span>
+			<!-- /ko -->
+			<!-- ko if: (sharedWithOthers()) -->
+			<span class="file_shared_icon" data-bind="click: function (oItem) { $root.onFileShareIconClick(oItem); }"></span>
+			<!-- /ko -->
+			<!-- ko if: (allowPublicLink() && published()) -->
+			<span class="file_published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
+			<!-- /ko -->
+		</div>
+		<div class="spacer"></div>
 		<span class="progress" data-bind="visible: visibleProgress()">
 			<span data-bind="text: progressText"></span>
 			<a href="javascript: void(0)" data-bind="i18n: {'key': 'COREWEBCLIENT/ACTION_CANCEL'},
@@ -41,17 +53,6 @@
 				<a href="javascript: void(0)" data-bind="visible: secondAction().length > 0,
 						click: function () { executeAction(secondAction()); }, text: getActionText(secondAction()), clickBubble: false"></a>
 			</div>
-		</div>
-		<div class="file_states">
-			<!-- ko if: (bIsSecure()) -->
-			<span class="file_encrypted_icon" data-bind="click: function (oItem) { $root.onSecureIconClick(oItem); }"></span>
-			<!-- /ko -->
-			<!-- ko if: (sharedWithOthers()) -->
-			<span class="file_shared_icon" data-bind="click: function (oItem) { $root.onFileShareIconClick(oItem); }"></span>
-			<!-- /ko -->
-			<!-- ko if: (allowPublicLink() && published()) -->
-			<span class="file_published_icon" data-bind="click: function (oItem) { $root.onShareIconClick(oItem); }"></span>
-			<!-- /ko -->
 		</div>
 		<div class="clearfix"></div>
 	</div>

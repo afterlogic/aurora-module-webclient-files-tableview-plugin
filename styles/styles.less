@@ -36,24 +36,30 @@
 		.item_content {
 			padding: 6px 16px 6px 0px;
 			white-space: nowrap;
+			display: flex;
 		}
 
-		.image, .name, .actions, .progress, &.folder2 .icon {
+		.image, .name, .file_states, .actions, .progress, &.folder2 .icon {
 			display: inline-block;
-			float: left;
+			flex-grow: 0;
 			line-height: 46px;
 			margin: 0 0 0 18px;
 			text-align: center;
 			vertical-align: middle;
 		}
+		.name {
+			overflow: hidden;
+		}
+		.spacer {
+			flex-grow: 1;
+		}
 		.actions {
-			float: right;
 			a {
 				margin-right: 10px;
 			}
 		}
 		.file_states {
-			float: left;
+			line-height: 18px;
 			margin: 14px 0 14px 12px;
 			position: initial;
 		}
