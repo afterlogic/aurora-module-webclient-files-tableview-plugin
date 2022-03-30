@@ -7,7 +7,7 @@
 	<div class="item_content ui-droppable dragHandle" data-bind="css: {'recivedAnim': recivedAnim()}, droppable: {valueFunc: function (oEvent, oUi) {$root.filesDrop($data, oEvent, oUi);}}">
 		<div class="image">
 			<span class="icon"></span>
-			<!-- ko if: bSharedWithMe -->
+			<!-- ko if: sharedWithMe -->
 			<span class="folder_shared_with_me_icon" data-bind="customTooltip: sHeaderText"></span>
 			<!-- /ko -->
 		</div>
