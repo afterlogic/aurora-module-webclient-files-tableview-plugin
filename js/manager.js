@@ -29,17 +29,17 @@ module.exports = function (oAppData) {
 						TextUtils.i18n('%MODULENAME%/LABEL_SETTINGS_TAB')
 					]
 				);
-//				{
-					App.subscribeEvent('Files::ChangeItemsView', function (oParam) {
-						if (Settings.enableModule())
-						{
-							oParam.View.itemsViewTemplate(TemplateName);
-						}
-						Settings.enableModule.subscribe(function(newValue){
-							oParam.View.itemsViewTemplate(newValue ? TemplateName : oParam.TemplateName);
-						});
+
+				App.subscribeEvent('Files::ChangeItemsView', function (oParam) {
+					if (Settings.enableModule())
+					{
+						oParam.View.itemsViewTemplate(TemplateName);
+					}
+					Settings.enableModule.subscribe(function(newValue){
+						oParam.View.itemsViewTemplate(newValue ? TemplateName : oParam.TemplateName);
 					});
-//				}
+				});
+
 				App.subscribeEvent('FilesWebclient::ShowView::after', function (oParams) {
 					var 
 						previewFileData = {
