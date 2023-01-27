@@ -18,50 +18,47 @@ namespace Aurora\Modules\FilesTableviewWebclientPlugin;
  */
 class Module extends \Aurora\System\Module\AbstractWebclientModule
 {
-	public function init()
-	{
-	}
+    public function init()
+    {
+    }
 
-	/**
-	 * Obtains list of module settings for authenticated user.
-	 *
-	 * @return array
-	 */
-	public function GetSettings()
-	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
+    /**
+     * Obtains list of module settings for authenticated user.
+     *
+     * @return array
+     */
+    public function GetSettings()
+    {
+        \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 
-		$oUser = \Aurora\System\Api::getAuthenticatedUser();
-		if (!empty($oUser) && $oUser->isNormalOrTenant())
-		{
-			return array(
-				'EnableModule' => $oUser->{self::GetName().'::EnableModule'},
-				'EnablePreviewPane' => $oUser->{self::GetName().'::EnablePreviewPane'}
-			);
-		}
+        $oUser = \Aurora\System\Api::getAuthenticatedUser();
+        if (!empty($oUser) && $oUser->isNormalOrTenant()) {
+            return array(
+                'EnableModule' => $oUser->{self::GetName().'::EnableModule'},
+                'EnablePreviewPane' => $oUser->{self::GetName().'::EnablePreviewPane'}
+            );
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	/**
-	 * Updates settings of the Simple Chat Module.
-	 *
-	 * @param boolean $EnableModule indicates if user turned on Simple Chat Module.
-	 * @return boolean
-	 */
-	public function UpdateSettings($EnableModule, $EnablePreviewPane)
-	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::NormalUser);
+    /**
+     * Updates settings of the Simple Chat Module.
+     *
+     * @param boolean $EnableModule indicates if user turned on Simple Chat Module.
+     * @return boolean
+     */
+    public function UpdateSettings($EnableModule, $EnablePreviewPane)
+    {
+        \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::NormalUser);
 
-		$iUserId = \Aurora\System\Api::getAuthenticatedUserId();
-		if (0 < $iUserId)
-		{
-			$oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserUnchecked($iUserId);
-			$oUser->setExtendedProp(self::GetName().'::EnableModule', $EnableModule);
-			$oUser->setExtendedProp(self::GetName().'::EnablePreviewPane', $EnablePreviewPane);
-			\Aurora\Modules\Core\Module::Decorator()->UpdateUserObject($oUser);
-		}
-		return true;
-	}
-
+        $iUserId = \Aurora\System\Api::getAuthenticatedUserId();
+        if (0 < $iUserId) {
+            $oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserUnchecked($iUserId);
+            $oUser->setExtendedProp(self::GetName().'::EnableModule', $EnableModule);
+            $oUser->setExtendedProp(self::GetName().'::EnablePreviewPane', $EnablePreviewPane);
+            \Aurora\Modules\Core\Module::Decorator()->UpdateUserObject($oUser);
+        }
+        return true;
+    }
 }
