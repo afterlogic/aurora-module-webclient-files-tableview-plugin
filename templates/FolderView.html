@@ -12,7 +12,13 @@
 			<!-- /ko -->
 		</div>
 
-		<span class="name fadeout" data-bind="text: displayName"></span>
+		<div class="name fadeout">
+			<div data-bind="text: displayName"></div>
+			<div class="data">
+				<span data-bind="text: sLastModified"></span>
+			</div>
+		</div>
+
 		<div class="file_states">
 			<!-- ko if: sharedWithOthers -->
 			<span class="file_shared_icon" data-bind="click: function (oItem) { $root.onFileShareIconClick(oItem); }"></span>
