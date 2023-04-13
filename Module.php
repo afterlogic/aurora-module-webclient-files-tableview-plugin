@@ -32,7 +32,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
         \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 
         $oUser = \Aurora\System\Api::getAuthenticatedUser();
-        if (!empty($oUser) && $oUser->isNormalOrTenant()) {
+        if ($oUser && $oUser->isNormalOrTenant()) {
             return array(
                 'EnableModule' => $oUser->{self::GetName().'::EnableModule'},
                 'EnablePreviewPane' => $oUser->{self::GetName().'::EnablePreviewPane'}
