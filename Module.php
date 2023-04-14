@@ -23,6 +23,15 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
     }
 
     /**
+     *
+     * @return Module
+     */
+    public static function Decorator()
+    {
+        return parent::Decorator();
+    }
+
+    /**
      * Obtains list of module settings for authenticated user.
      *
      * @return array
