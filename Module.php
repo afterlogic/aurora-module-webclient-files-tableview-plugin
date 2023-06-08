@@ -60,8 +60,8 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
         $oUser = \Aurora\System\Api::getAuthenticatedUser();
         if ($oUser && $oUser->isNormalOrTenant()) {
             return array(
-                'EnableModule' => $oUser->{self::GetName().'::EnableModule'},
-                'EnablePreviewPane' => $oUser->{self::GetName().'::EnablePreviewPane'}
+                'EnableModule' => $oUser->getExtendedProp(self::GetName().'::EnableModule'),
+                'EnablePreviewPane' => $oUser->getExtendedProp(self::GetName().'::EnablePreviewPane')
             );
         }
 
