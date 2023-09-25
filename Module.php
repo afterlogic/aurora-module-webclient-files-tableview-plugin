@@ -20,9 +20,7 @@ namespace Aurora\Modules\FilesTableviewWebclientPlugin;
  */
 class Module extends \Aurora\System\Module\AbstractWebclientModule
 {
-    public function init()
-    {
-    }
+    public function init() {}
 
     /**
      * @return Module
@@ -60,8 +58,8 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
         $oUser = \Aurora\System\Api::getAuthenticatedUser();
         if ($oUser && $oUser->isNormalOrTenant()) {
             return array(
-                'EnableModule' => $oUser->getExtendedProp(self::GetName().'::EnableModule'),
-                'EnablePreviewPane' => $oUser->getExtendedProp(self::GetName().'::EnablePreviewPane')
+                'EnableModule' => $oUser->getExtendedProp(self::GetName() . '::EnableModule'),
+                'EnablePreviewPane' => $oUser->getExtendedProp(self::GetName() . '::EnablePreviewPane')
             );
         }
 
@@ -81,8 +79,8 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
         $iUserId = \Aurora\System\Api::getAuthenticatedUserId();
         if (0 < $iUserId) {
             $oUser = \Aurora\Modules\Core\Module::Decorator()->GetUserWithoutRoleCheck($iUserId);
-            $oUser->setExtendedProp(self::GetName().'::EnableModule', $EnableModule);
-            $oUser->setExtendedProp(self::GetName().'::EnablePreviewPane', $EnablePreviewPane);
+            $oUser->setExtendedProp(self::GetName() . '::EnableModule', $EnableModule);
+            $oUser->setExtendedProp(self::GetName() . '::EnablePreviewPane', $EnablePreviewPane);
             \Aurora\Modules\Core\Module::Decorator()->UpdateUserObject($oUser);
         }
         return true;
