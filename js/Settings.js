@@ -36,14 +36,14 @@ module.exports = {
 	},
 	
 	/**
-	 * Updates settings of simple chat module after editing.
+	 * Updates module settings after editing.
 	 * 
 	 * @param {boolean} bEnableModule New value of setting 'EnableModule'
 	 * @param {boolean} bEnablePreviewPane New value of setting 'EnablePreviewPane'
 	 */
-	update: function (bEnableModule, bEnablePreviewPane)
+	update: function (bEnableModule, bEnablePreviewPane = this.enablePreviewPane())
 	{
 		this.enableModule(bEnableModule);
-		this.enablePreviewPane(bEnablePreviewPane);
+		this.enablePreviewPane(bEnablePreviewPane); 
 	}
 };

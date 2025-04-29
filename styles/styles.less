@@ -1,3 +1,32 @@
+.toolbar .content .item {
+    &.item-files-grid,
+    &.item-files-list {
+		border: 1px solid #ccc;
+        float: right;
+        height: 32px;
+        line-height: 22px;
+        padding: 0;
+        border: unset;
+        background-color: #F1F1F1;
+        border-radius: 10px !important;
+        margin: 0;
+    }
+	&.item-files-grid {
+		background: url("../../images/modules/FilesTableviewWebclientPlugin/gridView.svg") no-repeat;
+	}
+
+    &.item-files-list {
+        margin: 0 8px 0 4px;
+		background: url("../../images/modules/FilesTableviewWebclientPlugin/listView.svg") no-repeat;
+    }
+
+    &.selected,
+    &.selected:hover {
+        background-color: #ebebeb;
+        // .theme-toolbar-pressed-button();
+    }
+}
+
 .panel.files .items_list .items_sub_list.item_list_table_view {
 	float: left;
 	width: 100%;

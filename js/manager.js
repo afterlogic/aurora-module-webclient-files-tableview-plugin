@@ -11,10 +11,21 @@ module.exports = function (oAppData) {
 		Settings = require('modules/%ModuleName%/js/Settings.js'),
 		
 		bShow = false,
-		TemplateName = '%ModuleName%_ItemsView'
+		TemplateName = '%ModuleName%_ItemsView',
+		ToggleFilesButtonView = null
 	;
 
 	Settings.init(oAppData);
+
+	function getButtonView()
+	{
+		if (!ToggleFilesButtonView)
+		{
+			ToggleFilesButtonView = require('modules/%ModuleName%/js/views/ToggleFilesButtonView.js');
+		}
+
+		return ToggleFilesButtonView;
+	}
 	
 	if (App.isUserNormalOrTenant())
 	{
@@ -22,7 +33,7 @@ module.exports = function (oAppData) {
 			start: function (ModulesManager) {
 				ModulesManager.run(
 					'SettingsWebclient',
-					'registerSettingsTabSection', 
+					'registerSettingsTabSection',
 					[
 						function () { return require('modules/%ModuleName%/js/views/FilesTableviewSettingsFormView.js'); },
 						Settings.HashModuleName,
@@ -30,14 +41,21 @@ module.exports = function (oAppData) {
 					]
 				);
 
-				App.subscribeEvent('Files::ChangeItemsView', function (oParam) {
-					if (Settings.enableModule())
+				App.subscribeEvent('FilesWebclient::ConstructView::after', function (oParams) {
+					if ('CFilesView' === oParams.Name)
 					{
-						oParam.View.itemsViewTemplate(TemplateName);
+						const originalTemplateName = oParams.View.itemsViewTemplate();
+
+						if (Settings.enableModule())
+						{
+							oParams.View.itemsViewTemplate(TemplateName);
+						}
+						Settings.enableModule.subscribe(function(newValue) {
+
+							console.log('newValue', newValue, TemplateName)
+							oParams.View.itemsViewTemplate(newValue ? TemplateName : originalTemplateName);
+						});
 					}
-					Settings.enableModule.subscribe(function(newValue){
-						oParam.View.itemsViewTemplate(newValue ? TemplateName : oParam.TemplateName);
-					});
 				});
 
 				App.subscribeEvent('FilesWebclient::ShowView::after', function (oParams) {
@@ -92,7 +110,9 @@ module.exports = function (oAppData) {
 						});
 					}
 				});
-			}
+
+				ModulesManager.run('FilesWebclient', 'registerToolbarButtons', [getButtonView()]);
+			},
 		};
 	}
 	
