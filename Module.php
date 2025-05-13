@@ -79,8 +79,12 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
         $iUserId = \Aurora\System\Api::getAuthenticatedUserId();
         if (0 < $iUserId) {
             $oUser = \Aurora\Api::getUserById($iUserId);
-            $oUser->setExtendedProp(self::GetName() . '::EnableModule', $EnableModule);
-            $oUser->setExtendedProp(self::GetName() . '::EnablePreviewPane', $EnablePreviewPane);
+            if ($EnableModule !== null) {
+                $oUser->setExtendedProp(self::GetName() . '::EnableModule', $EnableModule);
+            }
+            if ($EnablePreviewPane !== null) {
+                $oUser->setExtendedProp(self::GetName() . '::EnablePreviewPane', $EnablePreviewPane);
+            }
             \Aurora\Modules\Core\Module::Decorator()->UpdateUserObject($oUser);
         }
         return true;
