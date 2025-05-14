@@ -51,8 +51,6 @@ module.exports = function (oAppData) {
 							oParams.View.itemsViewTemplate(TemplateName);
 						}
 						Settings.enableModule.subscribe(function(newValue) {
-
-							console.log('newValue', newValue, TemplateName)
 							oParams.View.itemsViewTemplate(newValue ? TemplateName : originalTemplateName);
 						});
 					}
@@ -61,9 +59,16 @@ module.exports = function (oAppData) {
 				App.subscribeEvent('FilesWebclient::ShowView::after', function (oParams) {
 					var 
 						previewFileData = {
-							'displayName': ko.observable(''),
-							'fileInfo': ko.observable(''),
-							'enablePreviewPane': Settings.enablePreviewPane
+							displayName: ko.observable(''),
+							enablePreviewPane: Settings.enablePreviewPane,
+							type: ko.observable(''),
+							size: ko.observable(''),
+							// created: ko.observable(''),
+							modified: ko.observable(''),
+							location: ko.observable(''),
+							extension: ko.observable(''),
+							hasSelectedFile: ko.observable(false),
+							showPreview: ko.observable(false),
 						},
 						$RightPannel = $("<!-- ko template: {name: '%ModuleName%_PaneView'} --><!-- /ko -->"),
 						aImgMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
@@ -77,34 +82,40 @@ module.exports = function (oAppData) {
 
 						ko.applyBindings(previewFileData, $RightPannel.get(0));
 
-						oParams.View.firstSelectedFile.subscribe(function(selectedFile) {
+						oParams.View.firstSelectedFile.subscribe(function(selectedFile) {							
+							const fileIsSelected = !!selectedFile;
 							previewFileData.displayName('');
-							previewFileData.fileInfo('');
+							previewFileData.type('');
+							previewFileData.size('');
+							// previewFileData.created('');
+							previewFileData.modified('');
+							previewFileData.location('');
+    						previewFileData.hasSelectedFile(fileIsSelected);
+							previewFileData.extension('');
+							previewFileData.showPreview(false);
 							$("#files_view_pane").html("");
+
 							if (selectedFile !== undefined && Settings.enablePreviewPane())
 							{
 								previewFileData.displayName(selectedFile.displayName());
-								previewFileData.fileInfo(selectedFile.sHeaderText);
-								if (typeof(selectedFile.oExtendedProps) !== 'undefined' &&  typeof(selectedFile.oExtendedProps.InitializationVector) !== 'undefined')
-								{
-									$("#files_view_pane").html("<span style=\"font-style: normal;\n\
-										font-weight: normal;\n\
-										font-variant: normal;\n\
-										text-transform: none;\n\
-										line-height: 1;\n\
-										display: inline-block;\n\
-										font-size: 200px;\n\
-										height: 250px;\n\
-										font-family: 'afterlogic';\n\
-										width: 500px;\">&#59658;</span>");
-								}
-								else if (-1 !== $.inArray(selectedFile.mimeType(), aImgMimeTypes))
-								{
-									$("#files_view_pane").html("<img style='width:100%;' src='" + selectedFile.getActionUrl('view') + "'>");
-								}
-								else
-								{
-									$("#files_view_pane").html("<iframe id='view_iframe' name='view_iframe' style='width: 100%; height: 400px; border: none;' src='" + selectedFile.getActionUrl('view') + "'></iframe>");
+								previewFileData.type(selectedFile.type ? selectedFile.type() : '');
+								previewFileData.size(selectedFile.friendlySize ? selectedFile.friendlySize() : '');
+								// previewFileData.created(selectedFile.sHeaderText ? selectedFile.sHeaderText : '');
+								previewFileData.modified(selectedFile.sLastModified ? selectedFile.sLastModified : '');
+								previewFileData.location(selectedFile.path && selectedFile.path() ? selectedFile.path() : '/');
+								previewFileData.extension(selectedFile.extension ? selectedFile.extension() : '' );
+
+
+								if (selectedFile.getActionUrl('view') !== '') {
+									previewFileData.showPreview(true);
+									// paranoid encryption hero
+									if (typeof(selectedFile.oExtendedProps) !== 'undefined' &&  typeof(selectedFile.oExtendedProps.InitializationVector) !== 'undefined') {
+										$("#files_view_pane").html("encrypted");
+									} else if (-1 !== $.inArray(selectedFile.mimeType(), aImgMimeTypes)) {
+										$("#files_view_pane").html("<img src='" + selectedFile.getActionUrl('view') + "'>");
+									} else {
+										$("#files_view_pane").html("<iframe class='view_iframe' src='" + selectedFile.getActionUrl('view') + "'></iframe>");
+									}
 								}
 							}
 						});

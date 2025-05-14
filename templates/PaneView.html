@@ -1,7 +1,41 @@
-<div id="files_right_panel" class="panel_center file-preview" data-bind="visible: enablePreviewPane">
-	<div class="panel_top" data-bind="text: displayName()"></div>
-	<div id="files_view_pane" class="panel_center" style="height: initial; margin: 30px; text-align: center;"></div>
-	<div class="panel_center" style="height: initial; margin: 30px;">
-		<div data-bind="text: fileInfo()"></div>
+<div id="files_right_panel" class="panel_center file-preview" data-bind="visible: enablePreviewPane, customScrollbar: {x: false}">
+	<div class="scroll-inner">
+		<div class="panel_top" data-bind="visible: hasSelectedFile()">
+			<div class="title-file-info">
+				<div class="file">
+					<span class="icon" data-bind="css: extension().toLowerCase()"></span>
+				</div>
+				<div class="file-name" data-bind="text: displayName()"></div>
+			</div>
+
+			<div class="preview">
+				<div id="files_view_pane" class="panel_center" data-bind=" visible: showPreview()"></div>
+				<div class="file">
+					<span class="icon" data-bind="css: extension().toLowerCase(), visible: !showPreview()"></span>
+				</div>
+			</div>
+
+			<div class="info-title">Object information</div>
+			<div class="file-info">
+				<span class="title">Type:</span>
+				<div class="data-file" data-bind="text: type()"></div>
+			</div>
+			<div class="file-info">
+				<span class="title">Size:</span>
+				<div class="data-file" data-bind="text: size()"></div>
+			</div>
+			<!-- <div class="file-info">
+				<span class="title">Created:</span>
+				<div class="data-file" data-bind="text: created()"></div>
+			</div> -->
+			<div class="file-info">
+				<span class="title">Modified:</span>
+				<div class="data-file" data-bind="text: modified()"></div>
+			</div>
+			<div class="file-info">
+				<span class="title">Location:</span>
+				<div class="data-file" data-bind="text: location()"></div>
+			</div>
+		</div>
 	</div>
 </div>
