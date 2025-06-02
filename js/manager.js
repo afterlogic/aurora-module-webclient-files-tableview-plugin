@@ -110,7 +110,7 @@ module.exports = function (oAppData) {
 									previewFileData.showPreview(true);
 									// paranoid encryption hero
 									if (typeof(selectedFile.oExtendedProps) !== 'undefined' &&  typeof(selectedFile.oExtendedProps.InitializationVector) !== 'undefined') {
-										$("#files_view_pane").html("encrypted");
+										$("#files_view_pane").html("<div class='item key'><span class='icon'/></div>");
 									} else if (-1 !== $.inArray(selectedFile.mimeType(), aImgMimeTypes)) {
 										$("#files_view_pane").html("<img src='" + selectedFile.getActionUrl('view') + "'>");
 									} else {
