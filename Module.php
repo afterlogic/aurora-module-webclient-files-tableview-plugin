@@ -53,7 +53,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
      */
     public function GetSettings()
     {
-        \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
+        \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::NormalUser);
 
         $oUser = \Aurora\System\Api::getAuthenticatedUser();
         if ($oUser && $oUser->isNormalOrTenant()) {
@@ -63,7 +63,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
             );
         }
 
-        return null;
+        return [];
     }
 
     /**
