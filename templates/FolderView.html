@@ -1,4 +1,4 @@
-<div class="item folder2" data-bind="
+<div class="item folder2" data-test-id="files-item" data-bind="
 		draggablePlace: allowDrag() ? function (file, ctrlOrCmdUsed) { return $parent.dragAndDropHelper(file, ctrlOrCmdUsed); } : null,
 		draggableDragStartCallback: function() { if (allowDrag()) $root.dragover(true); },
 		draggableDragStopCallback: function() { if (allowDrag()) $root.dragover(false); },
